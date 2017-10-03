@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.csvreader.CsvWriter;
 import com.tophatter.bean.Product;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -68,6 +69,13 @@ public class Utils {
     map.put("bought", "bought");
   }
 
+  public static void mkdir(String dirPath){
+    File dir = new File(dirPath);
+    if (!dir.exists()) {
+      dir.mkdirs();
+    }
+  }
+
   public static void writeCsv(List<Product> products, String dest) throws Exception {
     CsvWriter csvWriter = new CsvWriter(dest, ',', Charset.forName("UTF-8"));
     String[] headers = map.keySet().toArray(new String[]{});
@@ -110,4 +118,5 @@ public class Utils {
     }
     return product;
   }
+
 }

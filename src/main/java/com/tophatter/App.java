@@ -1,5 +1,6 @@
 package com.tophatter;
 
+import static com.tophatter.common.Constants.BASE_PATH;
 import static com.tophatter.common.Constants.CATEGORY_PATH;
 import static com.tophatter.common.Constants.DETAILS_URL;
 import static com.tophatter.common.Constants.MAIN_URL;
@@ -15,9 +16,11 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
 
 public class App {
 
@@ -32,12 +35,12 @@ public class App {
     map.put("9206", "Sets");
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
+    Utils.mkdir(BASE_PATH);
     ExecutorService service = Executors.newCachedThreadPool();
     map.keySet().forEach(categoryId -> {
       service.submit(new Task(categoryId));
     });
-
   }
 
   @AllArgsConstructor
@@ -53,11 +56,12 @@ public class App {
         List products = new ArrayList();
         while (true) {
           String url = String.format(MAIN_URL, categoryId, page++);
+          System.out.println(url);
           String mainPage = HttpUtil.getData(url);
           Document document = Jsoup.parse(mainPage);
           Elements elements = document.getElementsByAttributeValue("data-catalog-id", categoryId);
           //TODO 测试
-          if (page == 5) {
+          if (page == 3) {
             break;
           }
           //后面的页都没有数据了，或者防爬虫，用代理再试几遍
