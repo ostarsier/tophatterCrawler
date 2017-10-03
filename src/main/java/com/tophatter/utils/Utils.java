@@ -7,9 +7,11 @@ import static com.tophatter.common.Constants.DESCRIPTION;
 import static com.tophatter.common.Constants.ESTIMATED_DAYS_TO_DELIVER;
 import static com.tophatter.common.Constants.IMAGE_URLS;
 import static com.tophatter.common.Constants.PRODUCT_BRAND;
+import static com.tophatter.common.Constants.PRODUCT_COLOR;
 import static com.tophatter.common.Constants.PRODUCT_MATERIAL;
 import static com.tophatter.common.Constants.RETAIL_PRICE_WITH_SYMBOL;
 import static com.tophatter.common.Constants.SHIPPING_PRICE_WITH_PARTIAL_SYMBOL;
+import static com.tophatter.common.Constants.SIZE;
 import static com.tophatter.common.Constants.STARTING_BID_AMOUNT_LOCAL;
 import static com.tophatter.common.Constants.TITLE;
 
@@ -43,21 +45,21 @@ public class Utils {
     map.put("Product Brand", "productBrand");
     map.put("Product Material", "productMaterial");
     map.put("Variation Unique ID", "");
-    map.put("Variation Size", "variationSize");//TODO 不知道哪个字段
-    map.put("Variation Color", "variationColor");//TODO 不知道哪个字段
-    map.put("Variation Quantity", "variationQuantity");//TODO 不知道哪个字段
+    map.put("Variation Size", "variationSize");
+    map.put("Variation Color", "variationColor");
+    map.put("Variation Quantity", "variationQuantity");
     map.put("Starting Bid", "startingBid");
     map.put("Buy Now Price", "buyNowPrice");
     map.put("Retail Price", "retailPrice");
-    map.put("Target Price", "targetPrice");//TODO 不知道哪个字段
+    map.put("Target Price", "targetPrice");
     map.put("Shipping Price", "shippingPrice");
     map.put("Ships From Country", "shipsFromCountry");
-    map.put("Shipping Weight In Ounces", "ShippingWeightInOunces");//TODO 不知道哪个字段
-    map.put("Days To Process Order", "daysToProcessOrder");//TODO 不知道哪个字段
+    map.put("Shipping Weight In Ounces", "ShippingWeightInOunces");
+    map.put("Days To Process Order", "daysToProcessOrder");
     map.put("Days To Deliver", "daysToDeliver");
-    map.put("Expedited Shipping Price", "expeditedShippingPrice");//expedited_shipping
+    map.put("Expedited Shipping Price", "expeditedShippingPrice");
     map.put("Expedited Delivery Time", "expeditedDeliveryTime");
-    map.put("Buy One Get One Price", "buyOneGetOnePrice");//lot_upsells
+    map.put("Buy One Get One Price", "buyOneGetOnePrice");
     map.put("Accessory Price", "accessoryPrice");
     map.put("Accessory Description", "accessoryDescription");
     map.put("Primary Image URL", "primaryUrl");
@@ -69,7 +71,7 @@ public class Utils {
     map.put("bought", "bought");
   }
 
-  public static void mkdir(String dirPath){
+  public static void mkdir(String dirPath) {
     File dir = new File(dirPath);
     if (!dir.exists()) {
       dir.mkdirs();
@@ -110,6 +112,10 @@ public class Utils {
         .shipsFromCountry(details.getString(COUNTRY))
         .daysToDeliver(details.getString(ESTIMATED_DAYS_TO_DELIVER))
         .productCondition(details.getString(CONDITION))
+        .variationSize(details.getString(SIZE))
+        .variationColor(details.getString(PRODUCT_COLOR))
+        .variationSize(details.getString(SIZE))
+        .variationSize(details.getString(SIZE))
         .build();
     JSONArray imgs = details.getJSONArray(IMAGE_URLS);
     for (int i = 1; i < imgs.size(); i++) {

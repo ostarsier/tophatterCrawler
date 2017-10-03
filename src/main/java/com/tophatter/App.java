@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -35,7 +34,7 @@ public class App {
     map.put("9206", "Sets");
   }
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     Utils.mkdir(BASE_PATH);
     ExecutorService service = Executors.newCachedThreadPool();
     map.keySet().forEach(categoryId -> {
@@ -61,15 +60,14 @@ public class App {
           Document document = Jsoup.parse(mainPage);
           Elements elements = document.getElementsByAttributeValue("data-catalog-id", categoryId);
           //TODO 测试
-          if (page == 3) {
+          if (page == 5) {
             break;
           }
           //后面的页都没有数据了，或者防爬虫，用代理再试几遍
           if (elements.isEmpty()) {
             break;
           }
-          //TODO limit(3) 测试
-          elements.stream().limit(3).forEach(element -> {
+          elements.stream().forEach(element -> {
             try {
               String productId = element.getElementsByAttribute("data-lot-id").get(0)
                   .attr("data-lot-id");

@@ -14,6 +14,8 @@ public interface Constants {
   String DETAILS_URL = "https://tophatter.com/api/v1/lots/%s?source=lot-view-catalog";
 
   String NAME = "name";
+  String SIZE = "size";
+  String PRODUCT_COLOR = "product_color";
   String IMAGE_URLS = "image_urls";
   String TITLE = "title";
   String DESCRIPTION = "description";
